@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('auth/facebook', 'SocialiteController@redirectToProvider')->name('auth.facebook');
+Route::get('auth/facebook/callback', 'SocialiteController@handleProviderCallback')->name('auth.callback');
