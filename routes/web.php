@@ -18,6 +18,8 @@ Route::get('/', function () {
 Route::get('auth/facebook', 'SocialiteController@redirectToProvider')->name('auth.facebook');
 Route::get('auth/facebook/callback', 'SocialiteController@handleProviderCallback')->name('auth.callback');
 
-Auth::routes();
+Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('register', 'Auth\RegisterController@register')->name('register');
+// Auth::routes();
 
 Route::get('/home', 'HomeController@index');
