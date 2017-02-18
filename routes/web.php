@@ -12,14 +12,18 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.facebook');
+});
+
+Route::get('/facebook', function(){
+	return view('auth.facebook');
 });
 
 Route::get('auth/facebook', 'SocialiteController@redirectToProvider')->name('auth.facebook');
 Route::get('auth/facebook/callback', 'SocialiteController@handleProviderCallback')->name('auth.callback');
 
-Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-Route::post('register', 'Auth\RegisterController@register')->name('register');
+Route::get('/complete/register/{id}', 'Auth\RegisterController@showRegistrationForm')->name('complete.register');
+Route::post('/complete/register/{id}', 'Auth\RegisterController@register')->name('register');
 // Auth::routes();
 
 Route::get('/home', 'HomeController@index');

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Socialite;
+use Crypt;
+use App\User;
 
 class SocialiteController extends Controller
 {
@@ -24,8 +26,20 @@ class SocialiteController extends Controller
 	 */
 	public function handleProviderCallback()
 	{
-		$user = Socialite::driver('facebook')->user();
+		$driver = 'facebook';
 
-		dd($user);
+		$user_social = Socialite::driver($driver)->user();
+
+		$user = User::firstOrNew(['email' => $user_social->email]);
+
+		if(!isset($user->id)){
+			$user->name = $user_social->name;
+			$user->social_auth = true;
+			$user->social_name = $driver;
+			$user->social_token = $user_social->token;
+			$user->save();
+		}
+
+		return redirect()->route('complete.register',['id' => Crypt::encrypt($user->id)]);
 	}
 }

@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use App\Profile;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Socialite;
+use Crypt;
 
 class RegisterController extends Controller
 {
@@ -49,11 +52,22 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
             'phone' => 'required',
             'from_name' => 'required'
         ]);
+    }
+
+    /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm($id)
+    {
+        $user = User::find(Crypt::decrypt($id));
+        $name = $user->name;
+        $email = $user->email;
+        return view('auth.register', compact('name','email'));
     }
 
     /**
@@ -70,16 +84,19 @@ class RegisterController extends Controller
         ]);
     }
 
-    public function register(Request $request)
+    public function register(Request $request, $id)
     {
         $this->validator($request->all())->validate();
 
         // event(new Registered($user = $this->create($request->all())));
-        
 
-        $this->guard()->login($user);
+        // $this->guard()->login($user);
 
-        return $this->registered($request, $user)
-                        ?: redirect($this->redirectPath());
+        $profile = Profile::updateOrCreate(
+            ['user_id' => Crypt::decrypt($id)],
+            ['from' => $request->input('from'), 'from_name' => $request->input('from_name'), 'phone' => $request->input('phone')]
+            );
+
+        return $profile;
     }
 }
