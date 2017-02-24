@@ -12,8 +12,14 @@
 */
 
 Route::get('/', function () {
-    return view('auth.facebook');
+    return redirect()->route('courses.list');
 });
+
+Route::group(['prefix' => 'courses'],function(){
+	Route::get('/list', 'PublicController@listCourses')->name('courses.list');
+	Route::get('/{slug}/register', 'PublicController@registerToCourse')->name('courses.register');
+});
+
 
 Route::get('/facebook', function(){
 	return view('auth.facebook');

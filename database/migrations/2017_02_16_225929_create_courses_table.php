@@ -18,7 +18,10 @@ class CreateCoursesTable extends Migration
             $table->string('name');
             $table->string('slug');
             $table->string('topic');
-            $table->string('description');
+            $table->text('description');
+            $table->string('address');
+            $table->date('date');
+            $table->time('time');
             $table->string('image')->nullable();
             $table->integer('quota'); //total de lugares
             $table->integer('busy'); //lugares ocupados
