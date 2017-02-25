@@ -34,7 +34,7 @@ $factory->define(App\Course::class, function (Faker\Generator $faker){
 		'time' => $faker->time('H:i:s', 'now'),
 		'image' => $faker->imageUrl(640, 480),
 		'quota' => 15,
-		'busy' => $faker->numberBetween(0, 15),
+		'busy' => $busy = $faker->numberBetween(0, 15),
 		'remaining' => 15 - $busy,
 	];
 });

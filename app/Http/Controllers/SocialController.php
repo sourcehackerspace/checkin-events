@@ -7,7 +7,7 @@ use Socialite;
 use Crypt;
 use App\User;
 
-class SocialiteController extends Controller
+class SocialController extends Controller
 {
 	/**
 	 * Redirect the user to the GitHub authentication page.
@@ -40,6 +40,14 @@ class SocialiteController extends Controller
 			$user->save();
 		}
 
-		return redirect()->route('complete.register',['id' => Crypt::encrypt($user->id)]);
+
+		if(session()->has('course')){
+			$course = session('course');
+			session()->forget('course');
+			return redirect()->route('complete.register',['slug' => $course->slug, 'id' => Crypt::encrypt($user->id)]);
+		}else{
+			return back()->with('error','Hubo un error, por favor vuelve a registrarte.');
+		}
+
 	}
 }

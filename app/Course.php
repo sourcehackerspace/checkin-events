@@ -12,4 +12,9 @@ class Course extends Model
     	
     	$this->attributes['slug'] = str_slug($value,'-');
     }
+
+    public function bookmarks()
+    {
+    	return $this->hasMany(Bookmark::class);
+    }
 }

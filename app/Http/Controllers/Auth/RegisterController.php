@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Socialite;
 use Crypt;
+use App\Course;
+use App\Bookmark;
 
 class RegisterController extends Controller
 {
@@ -62,12 +64,13 @@ class RegisterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showRegistrationForm($id)
+    public function showRegistrationForm($slug, $id)
     {
+        $course = Course::whereSlug($slug)->first();
         $user = User::find(Crypt::decrypt($id));
         $name = $user->name;
         $email = $user->email;
-        return view('auth.register', compact('name','email'));
+        return view('auth.register', compact('name','email','course'));
     }
 
     /**
@@ -84,19 +87,31 @@ class RegisterController extends Controller
         ]);
     }
 
-    public function register(Request $request, $id)
+    public function register(Request $request, $slug, $id)
     {
         $this->validator($request->all())->validate();
 
         // event(new Registered($user = $this->create($request->all())));
-
         // $this->guard()->login($user);
+        
+        // generar una exception para manejar el que quieren modifcar la url
+        
+        $id_decrypt = Crypt::decrypt($id);
 
         $profile = Profile::updateOrCreate(
-            ['user_id' => Crypt::decrypt($id)],
+            ['user_id' => $id_decrypt],
             ['from' => $request->input('from'), 'from_name' => $request->input('from_name'), 'phone' => $request->input('phone')]
             );
 
-        return $profile;
+        $course = Course::whereSlug($slug)->first();
+
+        $bookmark = Bookmark::create([
+            'course_id' => $course->id,
+            'user_id' => $id_decrypt
+            ]);
+
+        // envio de correo
+
+        return redirect()->route('register.success', compact('slug'));
     }
 }

@@ -16,8 +16,11 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix' => 'courses'],function(){
-	Route::get('/list', 'PublicController@listCourses')->name('courses.list');
-	Route::get('/{slug}/register', 'PublicController@registerToCourse')->name('courses.register');
+	Route::get('/list', 'CourseController@listCourses')->name('courses.list');
+	Route::get('/{slug}/register', 'CourseController@registerToCourse')->name('courses.register');
+	Route::get('/{slug}/register/{id}', 'CourseController@showRegistrationForm')->name('complete.register');
+	Route::post('/{slug}/register/{id}', 'CourseController@register')->name('register');
+	Route::get('/{slug}/registered/success', 'CourseController@successRegister')->name('register.success');
 });
 
 
@@ -25,11 +28,9 @@ Route::get('/facebook', function(){
 	return view('auth.facebook');
 });
 
-Route::get('auth/facebook', 'SocialiteController@redirectToProvider')->name('auth.facebook');
-Route::get('auth/facebook/callback', 'SocialiteController@handleProviderCallback')->name('auth.callback');
+Route::get('auth/facebook', 'SocialController@redirectToProvider')->name('auth.facebook');
+Route::get('auth/facebook/callback', 'SocialController@handleProviderCallback')->name('auth.callback');
 
-Route::get('/complete/register/{id}', 'Auth\RegisterController@showRegistrationForm')->name('complete.register');
-Route::post('/complete/register/{id}', 'Auth\RegisterController@register')->name('register');
 // Auth::routes();
 
 Route::get('/home', 'HomeController@index');
