@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Socialite;
 use Crypt;
 use App\User;
+use App\Bookmark;
 
 class SocialController extends Controller
 {
@@ -28,11 +29,21 @@ class SocialController extends Controller
 	{
 		$driver = 'facebook';
 
-		$user_social = Socialite::driver($driver)->user();
+		try {
+
+			$user_social = Socialite::driver($driver)->user();
+
+		} catch (\Exception $e) {
+
+            return back()->with('error', 'Hubo un error, por favor vuelve a registrarte.');
+        }
+
+		// dd($user_social); 
 
 		$user = User::firstOrNew(['email' => $user_social->email]);
 
-		if(!isset($user->id)){
+		if (!isset($user->id)) {
+
 			$user->name = $user_social->name;
 			$user->social_auth = true;
 			$user->social_name = $driver;
@@ -41,11 +52,20 @@ class SocialController extends Controller
 		}
 
 
-		if(session()->has('course')){
+		if (session()->has('course')) {
+
 			$course = session('course');
+
+			if (Bookmark::where('user_id', $user->id)->where('course_id', $course->id)->count() > 0) {
+
+				return back()->with('error','Ya estas registrado a este curso.');
+			}
+			
 			session()->forget('course');
+
 			return redirect()->route('complete.register',['slug' => $course->slug, 'id' => Crypt::encrypt($user->id)]);
-		}else{
+		} else {
+
 			return back()->with('error','Hubo un error, por favor vuelve a registrarte.');
 		}
 

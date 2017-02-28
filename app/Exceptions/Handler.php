@@ -44,6 +44,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof DecryptException) {
+            return response()->view('erros.not_found', [], 404);
+        }
+
         return parent::render($request, $exception);
     }
 

@@ -31,6 +31,4 @@ Route::get('/facebook', function(){
 Route::get('auth/facebook', 'SocialController@redirectToProvider')->name('auth.facebook');
 Route::get('auth/facebook/callback', 'SocialController@handleProviderCallback')->name('auth.callback');
 
-// Auth::routes();
-
 Route::get('/home', 'HomeController@index');
