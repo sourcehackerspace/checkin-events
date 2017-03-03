@@ -31,4 +31,14 @@ Route::get('/facebook', function(){
 Route::get('auth/facebook', 'SocialController@redirectToProvider')->name('auth.facebook');
 Route::get('auth/facebook/callback', 'SocialController@handleProviderCallback')->name('auth.callback');
 
+Route::group(['prefix' => 'admin'], function(){
+	Route::get('/courses/', 'Crud\CourseController@index')->name('crud.courses.index');
+	Route::get('/courses/show/{id}', 'Crud\CourseController@show')->name('crud.courses.show');
+	Route::get('/courses/create', 'Crud\CourseController@create')->name('crud.courses.create');
+	Route::post('/courses/storage', 'Crud\CourseController@storage')->name('crud.courses.storage');
+	Route::get('/courses/edit/{id}', 'Crud\CourseController@edit')->name('crud.courses.edit');
+	Route::post('/courses/update/{id}', 'Crud\CourseController@update')->name('crud.courses.update');
+	Route::get('/courses/delete/{id}', 'Crud\CourseController@delete')->name('crud.courses.delete');
+});
+
 Route::get('/home', 'HomeController@index');
