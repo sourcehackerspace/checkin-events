@@ -12,16 +12,17 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-/*$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
+        'name' => "Administrador general",
+        'email' => "admin@bluebeanmx.com",
+        'password' => $password ?: $password = bcrypt('Bluebean-19'),
+        'type' => 'admin',
         'remember_token' => str_random(10),
     ];
-});*/
+});
 
 $factory->define(App\Course::class, function (Faker\Generator $faker){
 	static $busy = 0;

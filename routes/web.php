@@ -15,6 +15,10 @@ Route::get('/', function () {
     return redirect()->route('courses.list');
 });
 
+Route::get('/login', 'Auth\LoginController@showLoginForm')->name('auth.login');
+Route::post('/login', 'Auth\LoginController@login');
+Route::post('/logout', 'Auth\LoginController@logout')->name('auth.logout');
+
 Route::group(['prefix' => 'courses'],function(){
 	Route::get('/list', 'CourseController@listCourses')->name('courses.list');
 	Route::get('/{slug}/register', 'CourseController@registerToCourse')->name('courses.register');
