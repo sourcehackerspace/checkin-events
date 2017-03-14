@@ -127,7 +127,7 @@ $style = [
 
 										<!-- Outro -->
 										<p style="{{ $style['paragraph'] }}">
-											{{ $course->description }}
+											{!! $course->description !!}
 										</p>
 										<p style="{{ $style['paragraph-center'] }}">
 											La cita es:

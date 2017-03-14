@@ -43,6 +43,9 @@ Route::group(['prefix' => 'admin'], function(){
 	Route::get('/courses/edit/{id}', 'Crud\CourseController@edit')->name('crud.courses.edit');
 	Route::post('/courses/update/{id}', 'Crud\CourseController@update')->name('crud.courses.update');
 	Route::get('/courses/delete/{id}', 'Crud\CourseController@delete')->name('crud.courses.delete');
+
+	Route::get('/users/', 'UserManagmentController@index')->name('users.index');
+	Route::get('/users/show/{id}', 'UserManagmentController@show')->name('users.show');
 });
 
 Route::get('/home', 'HomeController@index');

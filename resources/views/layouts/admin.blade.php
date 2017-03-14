@@ -13,12 +13,23 @@
 	<!-- Styles -->
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+	<link href="{{ asset('summernote/summernote.css') }}" rel="stylesheet">
+
 	<!-- Scripts -->
 	<script>
 		window.Laravel = {!! json_encode([
 			'csrfToken' => csrf_token(),
 		]) !!};
 	</script>
+	<style>
+		.alert-content{
+			position:fixed;
+			top: 50px;
+			right: 0px;
+			z-index: 90;
+			width: 35%;
+		}
+	</style>
 </head>
 <body>
 	<div id="app">
@@ -53,41 +64,28 @@
 							{{-- <li><a href="{{ route('login') }}">Login</a></li> --}}
 							{{-- <li><a href="{{ route('register') }}">Register</a></li> --}}
 						@else
-							<li><a href="{{ route('crud.courses.index') }}">Cursos</a></li>
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-									{{ Auth::user()->name }} <span class="caret"></span>
-								</a>
-
-								<ul class="dropdown-menu" role="menu">
-									<li>
-										<a href="{{ route('auth.logout') }}"
-											onclick="event.preventDefault();
-													 document.getElementById('logout-form').submit();">
-											Logout
-										</a>
-
-										<form id="logout-form" action="{{ route('auth.logout') }}" method="POST" style="display: none;">
-											{{ csrf_field() }}
-										</form>
-									</li>
-								</ul>
-							</li>
+							@include('layouts.menu')
 						@endif
 					</ul>
 				</div>
 			</div>
 		</nav>
-		@if (session('error'))
-			<div class="alert alert-warning">
-				{{ session('error') }}
-			</div>
-		@endif
+		@include('layouts.alerts')
 		@yield('content')
 	</div>
 
 	<!-- Scripts -->
 	<script src="{{ asset('js/app.js') }}"></script>
+	<script src="{{ asset('summernote/summernote.min.js') }}"></script>
+	<script>
+		$('document').ready(function(){
+			$('.delete').on('click', function(event){
+				if(!confirm('¿Está seguro que quiere eliminar esto?')){
+					event.preventDefault();
+				}
+			});
+		});
+	</script>
 	@yield('js')
 </body>
 </html>

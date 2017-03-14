@@ -8,10 +8,10 @@
 				<div class="panel-heading">Tu curso</div>
 				<div class="panel-body">
 					<div>
-						<img src="{{ $course->image }}" class="img-responsive" alt="{{ $course->slug }}">
+						<img src="{{ asset('storage/'.$course->image) }}" class="img-responsive" alt="{{ $course->slug }}">
 						<h2 class="text-center">{{ $course->name }}</h2>
 						<h3 class="text-center">{{ $course->topic }}</h3>
-						<p class="text-justify">{{ $course->description }}</p>
+						<p class="text-justify">{!! $course->description !!}</p>
 					</div>
 				</div>
 			</div>

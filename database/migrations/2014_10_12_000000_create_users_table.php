@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->enum('type', ['user','admin'])->default('user');
             $table->boolean('social_auth')->default(false);
             $table->enum('social_name',['facebook'])->nullable();
+            $table->string('social_id', 255)->nullable();
             $table->string('social_token', 255)->nullable();
             $table->rememberToken();
             $table->timestamps();

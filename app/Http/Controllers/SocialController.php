@@ -48,6 +48,7 @@ class SocialController extends Controller
 			$user->social_auth = true;
 			$user->social_name = $driver;
 			$user->social_token = $user_social->token;
+			$user->social_id = $user_social->id;
 			$user->save();
 		}
 

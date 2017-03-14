@@ -24,7 +24,7 @@ class CreateCoursesTable extends Migration
             $table->time('time');
             $table->string('image')->nullable();
             $table->integer('quota'); //total de lugares
-            $table->integer('busy'); //lugares ocupados
+            $table->integer('busy')->default(0); //lugares ocupados
             $table->integer('remaining'); //lugares restantes
             $table->timestamps();
         });

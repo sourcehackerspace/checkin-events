@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Crud;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Course;
+use App\Http\Requests\StoreCourse;
+use Storage;
 
 class CourseController extends Controller
 {
@@ -32,9 +34,23 @@ class CourseController extends Controller
 		return view('crud.courses.create');
 	}
 
-	public function storage(Request $request)
+	public function storage(StoreCourse $request)
 	{
-		return $request->all();
+
+		$course = Course::create($request->except(['_token', 'image']));
+
+		if ($request->hasFile('image')) {
+
+			if ($request->file('image')->isValid()) {
+
+				$path = $request->image->store('images', 'public');
+
+				$course->image = $path;
+				$course->save();
+			}
+		}
+
+		return redirect()->route('crud.courses.index')->with('status', 'Curso creado exitosamente.');
 	}
 
 	public function edit($id)
@@ -53,7 +69,11 @@ class CourseController extends Controller
 
 	public function delete($id)
 	{
-		$course = Course::destroy($id);
+		$course = Course::find($id);
+
+		Storage::delete('public/'.$course->image);
+
+		$course->delete();
 
 		return redirect()->route('crud.courses.index')->with('status', 'Curso Eliminado');
 	}
