@@ -49,3 +49,4 @@ Route::group(['prefix' => 'admin'], function(){
 });
 
 Route::get('/home', 'HomeController@index');
+Route::get('/prueba/conekta', 'HomeController@pruebaConekta');
