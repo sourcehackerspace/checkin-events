@@ -11,10 +11,10 @@
 	<title>{{ config('app.name', 'Laravel') }}</title>
 
 	<!-- Styles -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-	<link href="{{ asset('summernote/summernote.css') }}" rel="stylesheet">
-
+	
+	@yield('styles')
 	<!-- Scripts -->
 	<script>
 		window.Laravel = {!! json_encode([
@@ -33,41 +33,15 @@
 </head>
 <body>
 	<div id="app">
-		<nav class="navbar navbar-default navbar-static-top">
-			<div class="container">
-				<div class="navbar-header">
-
-					<!-- Collapsed Hamburger -->
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-						<span class="sr-only">Toggle Navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-
-					<!-- Branding Image -->
-					<a class="navbar-brand" href="{{ url('/') }}">
-						Cursos
-					</a>
-				</div>
-
-				<div class="collapse navbar-collapse" id="app-navbar-collapse">
-					<!-- Left Side Of Navbar -->
-					<ul class="nav navbar-nav">
-						&nbsp;
-					</ul>
-
-					<!-- Right Side Of Navbar -->
-					<ul class="nav navbar-nav navbar-right">
-						<!-- Authentication Links -->
-						@if (Auth::guest())
-							{{-- <li><a href="{{ route('login') }}">Login</a></li> --}}
-							{{-- <li><a href="{{ route('register') }}">Register</a></li> --}}
-						@else
-							@include('layouts.menu')
-						@endif
-					</ul>
-				</div>
+		<nav>
+			<div class="nav-wrapper">
+				<a href="#!" class="brand-logo">Eventos</a>
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					@if (Auth::guest())
+					@else
+						@include('layouts.menu')
+					@endif
+				</ul>
 			</div>
 		</nav>
 		@include('layouts.alerts')
@@ -76,7 +50,6 @@
 
 	<!-- Scripts -->
 	<script src="{{ asset('js/app.js') }}"></script>
-	<script src="{{ asset('summernote/summernote.min.js') }}"></script>
 	<script>
 		$('document').ready(function(){
 			$('.delete').on('click', function(event){

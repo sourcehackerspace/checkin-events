@@ -2,15 +2,19 @@
 @section('content')
 	@locale
 	<div class="container">
-		<div class="panel panel-default">
-			<div class="panel-heading">{{ $course->name }}</div>
-			<div class="panel-body">
+		<div class="card z-depth-4 grey lighten-4">
+			<div class="card-content blue-grey white-text">
+				<div class="card-title">
+					{{ $course->title }}
+				</div>
+				<p>{{ $course->subtitle }}</p>
+			</div>
+			<div class="card-content">
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col l6">
 						<img src="{{ asset('storage/'.$course->image) }}" alt="" class="img-responsive">
 					</div>
-					<div class="col-md-6">
-						<p><strong>Tema:</strong> {{ $course->topic }}</p>
+					<div class="col l6">
 						<p><strong>Descripcion:</strong> {!! $course->description !!}</p>
 						<p><strong>Dirección:</strong> {{ $course->address }}</p>
 						<p><strong>Fecha:</strong> @datetime($course->date.' '.$course->time)</p>

@@ -8,8 +8,8 @@ class Course extends Model
 {
 
     protected $fillable = [
-        'name',
-        'topic',
+        'title',
+        'subtitle',
         'address',
         'date',
         'time',
@@ -17,9 +17,9 @@ class Course extends Model
         'description',
     ];
 
-    public function setNameAttribute($value)
+    public function setTitleAttribute($value)
     {
-    	$this->attributes['name'] = $value;
+    	$this->attributes['title'] = $value;
     	
     	$this->attributes['slug'] = str_slug($value,'-');
     }

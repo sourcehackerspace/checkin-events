@@ -11,3 +11,17 @@
 // Materialize
 @import "node_modules/materialize-css/sass/materialize.scss";
 
+@import "materialNote";
+
+.back-shadow{
+	background-color: rgba(40, 44, 44, 0.6);
+	width: 100%;
+}
+
+.mylink{
+	color: #7fc719 !important;
+}
+
+.mylink:hover{
+	color: #ffffff !important;
+}

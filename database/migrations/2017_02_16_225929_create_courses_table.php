@@ -15,11 +15,14 @@ class CreateCoursesTable extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('title');
             $table->string('slug');
-            $table->string('topic');
+            $table->string('subtitle');
             $table->text('description');
             $table->string('address');
+            $table->boolean('free')->default(true);
+            $table->integer('cost')->default(0);
+            $table->enum('payment',['oxxo'])->default('oxxo');
             $table->date('date');
             $table->time('time');
             $table->string('image')->nullable();

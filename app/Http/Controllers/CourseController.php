@@ -104,7 +104,7 @@ class CourseController extends Controller
 			
 			session(['course' => $course]);
 
-			return view('auth.facebook', compact("course"));
+			return view('public.course_show', compact("course"));
 		}
 
 		return view('public.course_full');
@@ -126,7 +126,7 @@ class CourseController extends Controller
 		$name = $user->name;
 		$email = $user->email;
 
-		return view('auth.register', compact('name','email','course'));
+		return view('public.complete_register', compact('name','email','course'));
 	}
 
 	public function register(Request $request, $slug, $id)

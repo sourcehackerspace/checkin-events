@@ -27,8 +27,8 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 $factory->define(App\Course::class, function (Faker\Generator $faker){
 	static $busy = 0;
 	return [
-		'name' => $faker->sentence(3, true),
-		'topic' => $faker->sentence(2, true),
+		'title' => $faker->sentence(3, true),
+		'subtitle' => $faker->sentence(2, true),
 		'description' => $faker->paragraph(6, true),
 		'address' => $faker->address,
 		'date' => $faker->date('Y-m-d', 'now'),

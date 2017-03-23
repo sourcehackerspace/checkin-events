@@ -25,7 +25,7 @@
 	<div id="app">
 		<nav>
 			<div class="nav-wrapper">
-				<a href="{{ url('/') }}" class="brand-logo">Logo</a>
+				<a href="{{ url('/') }}" class="brand-logo">Eventos</a>
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
 					<li><a href="sass.html">Sass</a></li>
 					<li><a href="badges.html">Components</a></li>
@@ -33,36 +33,6 @@
 				</ul>
 			</div>
 		</nav>
-		{{--<nav class="navbar navbar-default navbar-static-top">
-			<div class="container">
-				<div class="navbar-header">
-
-					<!-- Collapsed Hamburger -->
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-						<span class="sr-only">Toggle Navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-
-					<!-- Branding Image -->
-					<a class="navbar-brand" href="{{ url('/') }}">
-						Cursos
-					</a>
-				</div>
-
-				<div class="collapse navbar-collapse" id="app-navbar-collapse">
-					<!-- Left Side Of Navbar -->
-					<ul class="nav navbar-nav">
-						&nbsp;
-					</ul>
-
-					<!-- Right Side Of Navbar -->
-					<ul class="nav navbar-nav navbar-right">
-					</ul>
-				</div>
-			</div>
-		</nav> --}}
 		@if (session('error'))
 			<div class="alert alert-warning">
 				{{ session('error') }}

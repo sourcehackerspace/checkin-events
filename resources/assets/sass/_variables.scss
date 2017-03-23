@@ -40,9 +40,9 @@
 
 /* Variables for Materialize */
 
-$primary-color: #00BCD4;
-$primary-color-light: #B2EBF2;
-$primary-color-dark: #0097A7;
+$primary-color: #233945;
+$primary-color-light: false;
+$primary-color-dark: false;
 
 @if not $primary-color-light {
 	$primary-color-light: lighten($primary-color, 15%);
@@ -51,7 +51,7 @@ $primary-color-dark: #0097A7;
 @if not $primary-color-dark {
 	$primary-color-dark: darken($primary-color, 15%);
 }
-$secondary-color: #FF5252;
+$secondary-color: #26a69a;
 $success-color: color("green", "base") !default;
 $error-color: color("red", "base") !default;
 

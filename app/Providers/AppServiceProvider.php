@@ -18,7 +18,11 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
 
         Blade::directive('datetime', function($expression) {
-			return "<?php echo Carbon\Carbon::parse($expression)->formatLocalized('%A %d de %B del %Y a las %R hrs.'); ?>";
+            return "<?php echo Carbon\Carbon::parse($expression)->formatLocalized('%A %d de %B del %Y a las %R hrs.'); ?>";
+        });
+
+        Blade::directive('date', function($expression) {
+			return "<?php echo Carbon\Carbon::parse($expression)->formatLocalized('%A %d de %B del %Y'); ?>";
 		});
 
 		Blade::directive('locale', function(){
