@@ -8,12 +8,12 @@ class Bookmark extends Model
 {
 
 	protected $fillable = [
-        'course_id', 'user_id'
+        'event_id', 'user_id'
     ];
 
-    public function course()
+    public function event()
     {
-    	return $this->belongsTo(Course::class);
+    	return $this->belongsTo(Event::class);
     }
 
     public function user()

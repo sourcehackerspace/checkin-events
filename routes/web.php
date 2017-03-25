@@ -12,19 +12,19 @@
 */
 
 Route::get('/', function () {
-    return redirect()->route('courses.list');
+    return view('public.home');
 });
 
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('auth.login');
 Route::post('/login', 'Auth\LoginController@login');
 Route::post('/logout', 'Auth\LoginController@logout')->name('auth.logout');
 
-Route::group(['prefix' => 'courses'],function(){
-	Route::get('/list', 'CourseController@listCourses')->name('courses.list');
-	Route::get('/{slug}/register', 'CourseController@registerToCourse')->name('courses.register');
-	Route::get('/{slug}/register/{id}', 'CourseController@showRegistrationForm')->name('complete.register');
-	Route::post('/{slug}/register/{id}', 'CourseController@register')->name('register');
-	Route::get('/{slug}/registered/success', 'CourseController@successRegister')->name('register.success');
+Route::group(['prefix' => 'events'],function(){
+	Route::get('/list', 'EventController@listEvents')->name('events.list');
+	Route::get('/{slug}/register', 'EventController@registerToEvent')->name('events.register');
+	Route::get('/{slug}/register/{id}', 'EventController@showRegistrationForm')->name('complete.register');
+	Route::post('/{slug}/register/{id}', 'EventController@register')->name('register');
+	Route::get('/{slug}/registered/success', 'EventController@successRegister')->name('register.success');
 });
 
 
@@ -36,13 +36,13 @@ Route::get('auth/facebook', 'SocialController@redirectToProvider')->name('auth.f
 Route::get('auth/facebook/callback', 'SocialController@handleProviderCallback')->name('auth.callback');
 
 Route::group(['prefix' => 'admin'], function(){
-	Route::get('/courses/', 'Crud\CourseController@index')->name('crud.courses.index');
-	Route::get('/courses/show/{id}', 'Crud\CourseController@show')->name('crud.courses.show');
-	Route::get('/courses/create', 'Crud\CourseController@create')->name('crud.courses.create');
-	Route::post('/courses/storage', 'Crud\CourseController@storage')->name('crud.courses.storage');
-	Route::get('/courses/edit/{id}', 'Crud\CourseController@edit')->name('crud.courses.edit');
-	Route::post('/courses/update/{id}', 'Crud\CourseController@update')->name('crud.courses.update');
-	Route::get('/courses/delete/{id}', 'Crud\CourseController@delete')->name('crud.courses.delete');
+	Route::get('/events/', 'Crud\EventController@index')->name('crud.events.index');
+	Route::get('/events/show/{id}', 'Crud\EventController@show')->name('crud.events.show');
+	Route::get('/events/create', 'Crud\EventController@create')->name('crud.events.create');
+	Route::post('/events/storage', 'Crud\EventController@storage')->name('crud.events.storage');
+	Route::get('/events/edit/{id}', 'Crud\EventController@edit')->name('crud.events.edit');
+	Route::post('/events/update/{id}', 'Crud\EventController@update')->name('crud.events.update');
+	Route::get('/events/delete/{id}', 'Crud\EventController@delete')->name('crud.events.delete');
 
 	Route::get('/users/', 'UserManagmentController@index')->name('users.index');
 	Route::get('/users/show/{id}', 'UserManagmentController@show')->name('users.show');

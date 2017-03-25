@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Contracts\Encryption\DecryptException;
 use App\User;
 use App\Profile;
-use App\Course;
+use App\Event;
 use App\Bookmark;
 use Socialite;
 use Crypt;
@@ -17,7 +17,7 @@ use App\Mail\VoucherMail;
 use Conekta\Conekta;
 use Conekta\Order;
 
-class CourseController extends Controller
+class EventController extends Controller
 {
 	protected function validator(array $data)
 	{
@@ -37,15 +37,15 @@ class CourseController extends Controller
 
 	protected function registerBookmark($slug, $user)
 	{
-		$course = Course::whereSlug($slug)->first();
+		$event = Event::whereSlug($slug)->first();
 
-		$course->busy ++;
-		$course->remaining --;
+		$event->busy ++;
+		$event->remaining --;
 
-		$course->save();
+		$event->save();
 
 		return Bookmark::create([
-				'course_id' => $course->id,
+				'event_id' => $event->id,
 				'user_id' => $user
 			]);
 
@@ -53,7 +53,7 @@ class CourseController extends Controller
 
 	public function createOrderConekta($slug, $id)
 	{
-		$course = Course::whereSlug($slug)->first();
+		$event = Event::whereSlug($slug)->first();
 
 		$user = User::find($id);
 
@@ -65,7 +65,7 @@ class CourseController extends Controller
 				"line_items" => array(
 					array(
 						"name" => "Incripción a curso",
-						"description" => "Pago de inscripción a curso: ".$course->name,
+						"description" => "Pago de inscripción a evento: ".$event->title,
 						"unit_price" => 50000,
 						"quantity" => 1
 					)
@@ -89,30 +89,30 @@ class CourseController extends Controller
 
 
 
-	public function listCourses()
+	public function listEvents()
 	{
-		$courses = Course::all();
+		$events = Event::all();
 
-		return view('public.courses_list', compact("courses"));
+		return view('public.events_list', compact("events"));
 	}
 
-	public function registerToCourse($slug)
+	public function registerToEvent($slug)
 	{
-		$course = Course::whereSlug($slug)->first();
+		$event = Event::whereSlug($slug)->first();
 
-		if ($course->remaining > 0) {
+		if ($event->remaining > 0) {
 			
-			session(['course' => $course]);
+			session(['event' => $event]);
 
-			return view('public.course_show', compact("course"));
+			return view('public.event_show', compact("event"));
 		}
 
-		return view('public.course_full');
+		return view('public.event_full');
 	}
 
 	public function showRegistrationForm($slug, $id)
 	{
-		$course = Course::whereSlug($slug)->first();
+		$event = Event::whereSlug($slug)->first();
 
 		try {
 
@@ -126,7 +126,7 @@ class CourseController extends Controller
 		$name = $user->name;
 		$email = $user->email;
 
-		return view('public.complete_register', compact('name','email','course'));
+		return view('public.complete_register', compact('name','email','event'));
 	}
 
 	public function register(Request $request, $slug, $id)
@@ -157,7 +157,7 @@ class CourseController extends Controller
 
 	public function successRegister($slug)
 	{
-		$course = Course::whereSlug($slug)->first();
+		$course = Event::whereSlug($slug)->first();
 
 		return view('public.register_success', compact('course'));
 	}

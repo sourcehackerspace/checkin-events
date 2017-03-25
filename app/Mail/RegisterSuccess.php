@@ -32,10 +32,10 @@ class RegisterSuccess extends Mailable
     public function build()
     {
         $user = $this->bookmark->user;
-        $course = $this->bookmark->course;
+        $event = $this->bookmark->event;
         return $this->view('emails.registered')
                     ->with('user', $user)
-                    ->with('course', $course)
+                    ->with('event', $event)
                     ->subject('Confirmación de Registro');
     }
 }

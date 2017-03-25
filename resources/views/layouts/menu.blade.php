@@ -1,12 +1,12 @@
 <li><a href="{{ route('users.index') }}">Usuarios</a></li>
 
-<li><a class="dropdown-button" href="#!" data-activates="dropcourses">Cursos<i class="material-icons right">arrow_drop_down</i></a></li>
+<li><a class="dropdown-button" href="#!" data-activates="dropcourses">Eventos<i class="material-icons right">arrow_drop_down</i></a></li>
 <ul id="dropcourses" class="dropdown-content">
 	<li>
-		<a href="{{ route('crud.courses.index') }}"> Todos </a>
+		<a href="{{ route('crud.events.index') }}"> Todos </a>
 	</li>
 	<li>
-		<a href="{{ route('crud.courses.create') }}"> Crear </a>
+		<a href="{{ route('crud.events.create') }}"> Crear </a>
 	</li>
 </ul>
 

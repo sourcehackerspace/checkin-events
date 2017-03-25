@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCourse extends FormRequest
+class StoreEvent extends FormRequest
 {
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -24,13 +24,13 @@ class StoreCourse extends FormRequest
 	public function rules()
 	{
 		return [
-		'name' => 'required',
-		'topic' => 'required',
-		'address' => 'required',
-		'date' => 'required',
-		'time' => 'required',
-		'quota' => 'required',
-		'description' => 'required',
+			// 'title' => 'required',
+			// 'summary' => 'required',
+			// 'address' => 'required',
+			// 'date' => 'required',
+			// 'time' => 'required',
+			// 'quota' => 'required',
+			// 'description' => 'required',
 		];
 	}
 
@@ -42,8 +42,8 @@ class StoreCourse extends FormRequest
 	public function messages()
 	{
 		return [
-		'topic.required' => 'El tema del curso es requerido',
-		'quota.required'  => 'El cupo del curso es requerido',
+			'summary.required' => 'El resumen del curso es requerido',
+			'quota.required'  => 'El cupo del curso es requerido',
 		];
 	}
 }

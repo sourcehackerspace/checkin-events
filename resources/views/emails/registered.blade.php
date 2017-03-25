@@ -93,7 +93,7 @@ $style = [
 										</p>
 
 										<p style="{{ $style['header-1'] }} {{ $style['paragraph-center'] }}">
-											{{ $course->name }}
+											{{ $event->name }}
 										</p>
 
 										<!-- Action Button -->
@@ -127,16 +127,16 @@ $style = [
 
 										<!-- Outro -->
 										<p style="{{ $style['paragraph'] }}">
-											{!! $course->description !!}
+											{!! $event->description !!}
 										</p>
 										<p style="{{ $style['paragraph-center'] }}">
 											La cita es:
 										</p>
 										<p style="{{ $style['paragraph'] }} {{ $style['paragraph-center'] }}">
-											@datetime($course->date.' '.$course->time)
+											@datetime($event->date.' '.$event->time)
 										</p>
 										<p style="{{ $style['paragraph'] }} {{ $style['paragraph-center'] }}">
-											{{ $course->address }}
+											{{ $event->address }}
 										</p>
 										<p style="{{ $style['paragraph'] }}">
 											No faltes.

@@ -15,11 +15,13 @@ class CreateBookmarksTable extends Migration
     {
         Schema::create('bookmarks', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('course_id')->unsigned();
+            $table->integer('event_id')->unsigned();
             $table->integer('user_id')->unsigned();
+            $table->integer('quantity')->default(1);
+            $table->string('payment')->nullable();
             $table->timestamps();
 
-            $table->foreign('course_id')->references('id')->on('courses');
+            $table->foreign('event_id')->references('id')->on('events');
             $table->foreign('user_id')->references('id')->on('users');
         });
     }

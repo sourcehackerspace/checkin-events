@@ -11,7 +11,7 @@
 						<div class="col-md-6">
 							<div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
 								<label class="control-label" for="nameInput">Nombre del curso</label>
-								<input type="text" name="name" class="form-control" id="nameInput" value="{{ old('name') ? old('name') : $course->name }}" placeholder="Desarrollo de aplicaciones web...">
+								<input type="text" name="name" class="form-control" id="nameInput" value="{{ old('name') ? old('name') : $event->name }}" placeholder="Desarrollo de aplicaciones web...">
 								@if ($errors->has('name'))
 									<span class="help-block">
 										<strong>{{ $errors->first('name') }}</strong>
@@ -20,12 +20,12 @@
 							</div>
 						</div>
 						<div class="col-md-6">
-							<div class="form-group {{ $errors->has('topic') ? ' has-error' : '' }}">
+							<div class="form-group {{ $errors->has('summary') ? ' has-error' : '' }}">
 								<label class="control-label" for="topicInput">Tema</label>
-								<input type="text" name="topic" class="form-control" id="topicInput" value="{{ old('topic') ? old('topic') : $course->topic }}" placeholder="Desarrollo web">
-								@if ($errors->has('topic'))
+								<input type="text" name="summary" class="form-control" id="summaryInput" value="{{ old('summary') ? old('summary') : $event->summary }}" placeholder="Desarrollo web">
+								@if ($errors->has('summary'))
 									<span class="help-block">
-										<strong>{{ $errors->first('topic') }}</strong>
+										<strong>{{ $errors->first('summary') }}</strong>
 									</span>
 								@endif
 							</div>
@@ -36,7 +36,7 @@
 
 					<div class="form-group {{ $errors->has('address') ? ' has-error' : '' }}">
 						<label class="control-label" for="addressInput">Dirección</label>
-						<input type="text" name="address" class="form-control" id="addressInput" value="{{ old('address') ? old('address') : $course->address }}" placeholder="Calle, Numero, Colonia, Estado.">
+						<input type="text" name="address" class="form-control" id="addressInput" value="{{ old('address') ? old('address') : $event->address }}" placeholder="Calle, Numero, Colonia, Estado.">
 						@if ($errors->has('address'))
 							<span class="help-block">
 								<strong>{{ $errors->first('address') }}</strong>
@@ -48,7 +48,7 @@
 						<div class="col-md-4">
 							<div class="form-group {{ $errors->has('date') ? ' has-error' : '' }}">
 								<label class="control-label" for="dateInput">Fecha del curso</label>
-								<input type="date" name="date" class="form-control" value="{{ old('date') ? old('date') : $course->date }}" id="dateInput">
+								<input type="date" name="date" class="form-control" value="{{ old('date') ? old('date') : $event->date }}" id="dateInput">
 								@if ($errors->has('date'))
 									<span class="help-block">
 										<strong>{{ $errors->first('date') }}</strong>
@@ -59,7 +59,7 @@
 						<div class="col-md-4">
 							<div class="form-group {{ $errors->has('time') ? ' has-error' : '' }}">
 								<label class="control-label" for="timeInput">Hora del curso</label>
-								<input type="time" name="time" class="form-control" value="{{ old('time') ? old('time') : $course->time }}" id="timeInput">
+								<input type="time" name="time" class="form-control" value="{{ old('time') ? old('time') : $event->time }}" id="timeInput">
 								@if ($errors->has('time'))
 									<span class="help-block">
 										<strong>{{ $errors->first('time') }}</strong>
@@ -70,7 +70,7 @@
 						<div class="col-md-4">
 							<div class="form-group {{ $errors->has('quota') ? ' has-error' : '' }}">
 								<label class="control-label" for="qoutaInput">Cupo del curso</label>
-								<input type="number" name="quota" class="form-control" id="qoutaInput" value="{{ old('quota') ? old('quota') : $course->quota }}" placeholder="16">
+								<input type="number" name="quota" class="form-control" id="qoutaInput" value="{{ old('quota') ? old('quota') : $event->quota }}" placeholder="16">
 								@if ($errors->has('quota'))
 									<span class="help-block">
 										<strong>{{ $errors->first('quota') }}</strong>
@@ -82,7 +82,7 @@
 
 					<div class="form-group {{ $errors->has('description') ? ' has-error' : '' }}">
 						<label class="control-label" for="descriptionInput">Descripción</label>
-						<textarea name="description" class="form-control" id="descriptionInput" cols="30" rows="10">{{ old('description') ? old('description') : $course->description }}</textarea>
+						<textarea name="description" class="form-control" id="descriptionInput" cols="30" rows="10">{{ old('description') ? old('description') : $event->description }}</textarea>
 						@if ($errors->has('description'))
 							<span class="help-block">
 								<strong>{{ $errors->first('description') }}</strong>
@@ -92,7 +92,7 @@
 					
 					<div class="row">
 						<div class="col-md-6">
-							<img src="{{ asset('storage/'.$course->image) }}" alt="" class="img-responsive">
+							<img src="{{ asset('storage/'.$event->image) }}" alt="" class="img-responsive">
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">

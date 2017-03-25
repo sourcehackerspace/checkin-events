@@ -53,18 +53,18 @@ class SocialController extends Controller
 		}
 
 
-		if (session()->has('course')) {
+		if (session()->has('event')) {
 
-			$course = session('course');
+			$event = session('event');
 
-			if (Bookmark::where('user_id', $user->id)->where('course_id', $course->id)->count() > 0) {
+			if (Bookmark::where('user_id', $user->id)->where('event_id', $event->id)->count() > 0) {
 
 				return back()->with('error','Ya estas registrado a este curso.');
 			}
 			
-			session()->forget('course');
+			session()->forget('event');
 
-			return redirect()->route('complete.register',['slug' => $course->slug, 'id' => Crypt::encrypt($user->id)]);
+			return redirect()->route('complete.register',['slug' => $event->slug, 'id' => Crypt::encrypt($user->id)]);
 		} else {
 
 			return back()->with('error','Hubo un error, por favor vuelve a registrarte.');

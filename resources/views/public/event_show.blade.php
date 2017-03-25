@@ -6,7 +6,7 @@
 	<div class="row">
 		<div class="col l12">
 				<div class="center">
-					<h3>{{ $course->title }}</h3>
+					<h3>{{ $event->title }}</h3>
 				</div>
 {{-- 			<div class="card">
 			</div> --}}	
@@ -15,7 +15,7 @@
 			<div class="card">
 				<div class="card-image">
 					<img src="http://lorempixel.com/640/480/city/" class="img-responsive">
-			{{-- <img src="{{ asset('storage/'.$course->image) }}" class="img-responsive" alt="{{ $course->slug }}"> --}}
+			{{-- <img src="{{ asset('storage/'.$event->image) }}" class="img-responsive" alt="{{ $event->slug }}"> --}}
 				</div>
 			</div>
 		</div>
@@ -23,8 +23,8 @@
 			<div class="card blue darken-1">
 				<div class="card-content white-text">
 					<span class="card-title"><strong>Datos</strong></span>
-					<p><strong>Dirección:</strong> {{ $course->address }}</p><br>
-					<p><strong>Fecha de inicio:</strong> @datetime($course->date.' '.$course->time)</p>
+					<p><strong>Dirección:</strong> {{ $event->address }}</p><br>
+					<p><strong>Fecha de inicio:</strong> @datetime($event->date.' '.$event->time)</p>
 				</div>
 			</div>
 			<div class="card green accent-4">
@@ -43,11 +43,11 @@
 			<div class="card blue darken-1 white-text">
 				<div class="card-content">
 					<h5><strong>Tema</strong></h5>
-					<h6>{{ $course->subtitle }}</h6>
+					<h6>{{ $event->subtitle }}</h6>
 					<br>
 					<h5><strong>Descripción</strong></h5>
 					<div>
-						{!! $course->description !!}
+						{!! $event->description !!}
 					</div>
 				</div>
 			</div>

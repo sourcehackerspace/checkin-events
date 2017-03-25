@@ -24,11 +24,12 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Course::class, function (Faker\Generator $faker){
+$factory->define(App\Event::class, function (Faker\Generator $faker){
 	static $busy = 0;
 	return [
-		'title' => $faker->sentence(3, true),
-		'subtitle' => $faker->sentence(2, true),
+		'title' => $faker->sentence(2, true),
+		'summary' => $faker->sentence(4, true),
+		'type' => 'curso',
 		'description' => $faker->paragraph(6, true),
 		'address' => $faker->address,
 		'date' => $faker->date('Y-m-d', 'now'),

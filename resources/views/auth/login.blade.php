@@ -4,7 +4,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col l4 offset-l4">
-			<div class="card-panel grey lighten-5 z-depth-4">
+			<div class="card-panel grey lighten-3 z-depth-4">
 				<div class="row">
 					<div class="col l12 center">
 						<img src="http://lorempixel.com/100/100/city/" alt="" class="circle img-responsive">
@@ -16,14 +16,14 @@
 					<div class="row">
 						<div class="input-field col l12">
 							<i class="material-icons prefix">perm_identity</i>
-							<input id="email" type="email" name="email" class="validate invalid" value="{{ old('email') }}" required>
-							<label for="email">Cuenta de correo</label>
+							<input id="email" type="email" name="email" class="{{ $errors->has('email') ? 'validate invalid' : '' }}" value="{{ old('email') }}" required>
+							<label for="email" data-error="{{ $errors->has('email') ? $errors->first('email') : 'Correo no valido' }}">Cuenta de correo</label>
 						</div>
 					</div>
 					<div class="row">
 						<div class="input-field col s12">
 							<i class="material-icons prefix">lock_outline</i>
-							<input id="password" type="password" class="validate" name="password" required>
+							<input id="password" type="password" name="password" required>
 							<label for="password">Contraseña</label>
 						</div>
 					</div>

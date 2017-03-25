@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCoursesTable extends Migration
+class CreateEventsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateCoursesTable extends Migration
      */
     public function up()
     {
-        Schema::create('courses', function (Blueprint $table) {
+        Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
             $table->string('slug');
-            $table->string('subtitle');
+            $table->string('summary');
             $table->text('description');
             $table->string('address');
-            $table->boolean('free')->default(true);
+            $table->boolean('isfree')->default(true);
             $table->integer('cost')->default(0);
             $table->enum('payment',['oxxo'])->default('oxxo');
             $table->date('date');
@@ -29,7 +29,14 @@ class CreateCoursesTable extends Migration
             $table->integer('quota'); //total de lugares
             $table->integer('busy')->default(0); //lugares ocupados
             $table->integer('remaining'); //lugares restantes
+            $table->integer('topic_id')->unsigned();
+            $table->integer('type_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('type_id')->references('id')->on('types');
+            $table->foreign('topic_id')->references('id')->on('topics');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -40,6 +47,6 @@ class CreateCoursesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('courses');
+        Schema::dropIfExists('events');
     }
 }

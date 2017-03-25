@@ -5,13 +5,13 @@
     <div class="row">
         <div class="col-md-4 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Tu curso</div>
+                <div class="panel-heading">Tu evento</div>
                 <div class="panel-body">
                     <div>
-                        <img src="{{ asset('storage/'.$course->image) }}" class="img-responsive" alt="{{ $course->slug }}">
-                        <h2 class="text-center">{{ $course->name }}</h2>
-                        <h3 class="text-center">{{ $course->topic }}</h3>
-                        <p class="text-justify">{!! $course->description !!}</p>
+                        <img src="{{ asset('storage/'.$event->image) }}" class="img-responsive" alt="{{ $event->slug }}">
+                        <h2 class="text-center">{{ $event->name }}</h2>
+                        <h3 class="text-center">{{ $event->topic }}</h3>
+                        <p class="text-justify">{!! $event->description !!}</p>
                     </div>
                 </div>
             </div>
