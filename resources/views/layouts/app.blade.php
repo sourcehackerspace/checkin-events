@@ -25,24 +25,21 @@
 	<div id="app">
 		<nav>
 			<div class="nav-wrapper">
-				<a href="{{ url('/') }}" class="brand-logo">Eventos</a>
+				<a href="{{ url('/') }}" class="brand-logo">hashevent</a>
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
-					<li><a href="sass.html">Sass</a></li>
-					<li><a href="badges.html">Components</a></li>
-					<li><a href="collapsible.html">JavaScript</a></li>
+					<li><a href="{{ route('events.list') }}">Eventos</a></li>
+					<li><a href="{{ route('auth.login') }}">Entrar</a></li>
 				</ul>
 			</div>
 		</nav>
-		@if (session('error'))
-			<div class="alert alert-warning">
-				{{ session('error') }}
-			</div>
-		@endif
+		@include('layouts.alerts')
 		@yield('content')
 	</div>
 	@include('layouts.footer')
 	<!-- Scripts -->
 	<script src="{{ asset('js/app.js') }}"></script>
+	<script>
+	</script>
 	@yield('js')
 </body>
 </html>

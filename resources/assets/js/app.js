@@ -18,3 +18,8 @@ require('./bootstrap');
 // const app = new Vue({
 //     el: '#app'
 // });
+$(document).ready(function () {
+	$("#card-alert .close").click(function() {
+		$(this).closest("#card-alert").fadeOut("slow")
+	});
+});

@@ -30,6 +30,16 @@ class Event extends Model
 		$this->attributes['remaining'] = $value;
 	}
 
+	public function getCostAttribute()
+	{
+		return $this->attributes['cost'] / 100;
+	}
+
+	public function getCostCentAttribute()
+	{
+		return $this->attributes['cost'];
+	}
+
 	public function bookmarks()
 	{
 		return $this->hasMany(Bookmark::class);

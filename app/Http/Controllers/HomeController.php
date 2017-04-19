@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Conekta\Conekta;
 use Conekta\Order;
+use App\Event;
 
 class HomeController extends Controller
 {
@@ -15,7 +16,7 @@ class HomeController extends Controller
 	 */
 	public function __construct()
 	{
-		$this->middleware('auth', ['except' => 'pruebaConekta']);
+		// $this->middleware('auth', ['except' => 'pruebaConekta']);
 	}
 
 	/**
@@ -24,6 +25,13 @@ class HomeController extends Controller
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index()
+	{
+		$events = Event::take(6)->get();
+
+		return view('public.home', compact("events"));
+	}
+
+	public function home()
 	{
 		return view('home');
 	}

@@ -1,16 +1,22 @@
-@if (session('error'))
-	<div class="alert-content">
-		<div class="alert alert-warning alert-dismissible fade in" role="alert">
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			{{ session('error') }}
+<div class="alert-box">
+	@if (session('error'))
+		<div id="card-alert" class="card red z-depth-4">
+			<div class="card-content white-text">
+				<p>{{ session('error') }}</p>
+			</div>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">×</span>
+			</button>
 		</div>
-	</div>
-@endif
-@if (session('status'))
-	<div class="alert-content">
-		<div class="alert alert-info alert-dismissible fade in" role="alert">
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			{{ session('status') }}
+	@endif
+	@if (session('status'))
+		<div id="card-alert" class="card light-blue">
+			<div class="card-content white-text">
+				<p>{{ session('status') }}</p>
+			</div>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">×</span>
+			</button>
 		</div>
-	</div>
-@endif
+	@endif
+</div>

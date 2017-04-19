@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('public.home');
-});
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('auth.login');
 Route::post('/login', 'Auth\LoginController@login');
@@ -48,5 +46,5 @@ Route::group(['prefix' => 'admin'], function(){
 	Route::get('/users/show/{id}', 'UserManagmentController@show')->name('users.show');
 });
 
-Route::get('/home', 'HomeController@index');
+Route::get('/home', 'HomeController@home');
 Route::get('/prueba/conekta', 'HomeController@pruebaConekta');

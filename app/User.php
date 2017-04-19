@@ -42,4 +42,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Bookmark::class);
     }
+
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
 }

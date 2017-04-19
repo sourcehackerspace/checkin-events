@@ -1,6 +1,6 @@
-<li><a href="{{ route('users.index') }}">Usuarios</a></li>
+{{-- <li><a href="{{ route('users.index') }}">Usuarios</a></li> --}}
 
-<li><a class="dropdown-button" href="#!" data-activates="dropcourses">Eventos<i class="material-icons right">arrow_drop_down</i></a></li>
+{{-- <li><a class="dropdown-button" href="#!" data-activates="dropcourses">Eventos<i class="material-icons right">arrow_drop_down</i></a></li>
 <ul id="dropcourses" class="dropdown-content">
 	<li>
 		<a href="{{ route('crud.events.index') }}"> Todos </a>
@@ -18,7 +18,7 @@
 	<li>
 		<a href="#!"> Crear </a>
 	</li>
-</ul>
+</ul> --}}
 
 <li><a class="dropdown-button" href="#!" data-activates="dropuser">{{ Auth::user()->name }}<i class="material-icons right">arrow_drop_down</i></a></li>
 <ul id="dropuser" class="dropdown-content">

@@ -30,32 +30,46 @@ class EventController extends Controller
 	protected function createProfile($id, $data)
 	{
 		return Profile::updateOrCreate(
-			['user_id' => $id],
-			['from' => $data['from'], 'from_name' => $data['from_name'], 'phone' => $data['phone']]
+				['user_id' => $id],
+				['from' => $data['from'], 'from_name' => $data['from_name'], 'phone' => $data['phone']]
 			);
 	}
 
-	protected function registerBookmark($slug, $user)
+	protected function registerBookmark($slug, $user, $ntickets)
 	{
+		$total = 0;
+
 		$event = Event::whereSlug($slug)->first();
 
-		$event->busy ++;
-		$event->remaining --;
+		$event->busy + $ntickets;
+		$event->remaining - $ntickets;
 
 		$event->save();
 
+		if(!$event->isfree){
+			$total = $ntickets * $event->cost;
+		}
+
 		return Bookmark::create([
 				'event_id' => $event->id,
-				'user_id' => $user
+				'user_id' => $user,
+				'quantity' => $ntickets,
+				'payment' => $total,
 			]);
 
 	}
 
-	public function createOrderConekta($slug, $id)
+	public function createOrderConekta($slug, $id, $ntickets)
 	{
 		$event = Event::whereSlug($slug)->first();
 
+		if ($event->isfree) {
+			return false;
+		}
+
 		$user = User::find($id);
+
+		// $total = $event->cost_cent * $ntickets;
 
 		Conekta::setApiKey("key_DGMkS6kqqh5aDfezvpzPgw");
 		Conekta::setApiVersion("2.0.0");
@@ -65,9 +79,9 @@ class EventController extends Controller
 				"line_items" => array(
 					array(
 						"name" => "Incripción a curso",
-						"description" => "Pago de inscripción a evento: ".$event->title,
-						"unit_price" => 50000,
-						"quantity" => 1
+						"description" => "Pago de inscripción al evento: ".$event->title,
+						"unit_price" => $event->cost_cent,
+						"quantity" => $ntickets
 					)
 				),
 				"currency" => "MXN",
@@ -86,8 +100,6 @@ class EventController extends Controller
 			)
 		);
 	}
-
-
 
 	public function listEvents()
 	{
@@ -142,23 +154,25 @@ class EventController extends Controller
 			return response()->view('errors.not_found', [], 404);
 		}
 
-		$this->createProfile($id_decrypt, $request->all());
+		$this->createProfile($id_decrypt, $request->only(['from', 'from_name', 'phone']));
 
-		$bookmark = $this->registerBookmark($slug, $id_decrypt);
+		$bookmark = $this->registerBookmark($slug, $id_decrypt, $request->input('ntickets'));
 
-		$order = $this->createOrderConekta($slug, $id_decrypt);
+		$order = $this->createOrderConekta($slug, $id_decrypt, $request->input('ntickets'));
 
 		Mail::to($bookmark->user->email)->send(new RegisterSuccess($bookmark));
 
-		Mail::to($bookmark->user->email)->send(new VoucherMail($order));
+		if($order){
+			Mail::to($bookmark->user->email)->send(new VoucherMail($order));
+		}
 
 		return redirect()->route('register.success', compact('slug'));
 	}
 
 	public function successRegister($slug)
 	{
-		$course = Event::whereSlug($slug)->first();
+		$event = Event::whereSlug($slug)->first();
 
-		return view('public.register_success', compact('course'));
+		return view('public.register_success', compact('event'));
 	}
 }

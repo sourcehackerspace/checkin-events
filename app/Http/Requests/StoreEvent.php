@@ -24,13 +24,13 @@ class StoreEvent extends FormRequest
 	public function rules()
 	{
 		return [
-			// 'title' => 'required',
-			// 'summary' => 'required',
-			// 'address' => 'required',
-			// 'date' => 'required',
-			// 'time' => 'required',
-			// 'quota' => 'required',
-			// 'description' => 'required',
+			'title' => 'required',
+			'summary' => 'required',
+			'address' => 'required',
+			'date' => 'required',
+			'time' => 'required',
+			'quota' => 'required',
+			'description' => 'required',
 		];
 	}
 
@@ -42,8 +42,8 @@ class StoreEvent extends FormRequest
 	public function messages()
 	{
 		return [
-			'summary.required' => 'El resumen del curso es requerido',
-			'quota.required'  => 'El cupo del curso es requerido',
+			'summary.required' => 'El resumen del evento es requerido',
+			'quota.required'  => 'El cupo del evento es requerido',
 		];
 	}
 }

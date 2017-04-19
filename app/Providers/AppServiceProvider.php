@@ -22,7 +22,11 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Blade::directive('date', function($expression) {
-			return "<?php echo Carbon\Carbon::parse($expression)->formatLocalized('%A %d de %B del %Y'); ?>";
+            return "<?php echo Carbon\Carbon::parse($expression)->formatLocalized('%A %d de %B del %Y'); ?>";
+        });
+
+        Blade::directive('shortdate', function($expression) {
+			return "<?php echo Carbon\Carbon::parse($expression)->formatLocalized('%d - %B - %Y'); ?>";
 		});
 
 		Blade::directive('locale', function(){

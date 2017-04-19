@@ -9,6 +9,7 @@ use App\Http\Requests\StoreEvent;
 use Storage;
 use App\Type;
 use App\Topic;
+use Auth;
 
 class EventController extends Controller
 {
@@ -19,7 +20,7 @@ class EventController extends Controller
 
 	public function index()
 	{
-		$events = Event::all();
+		$events = Auth::user()->events;
 
 		return view('crud.events.index')->with('events', $events);
 	}
@@ -42,9 +43,25 @@ class EventController extends Controller
 
 	public function storage(StoreEvent $request)
 	{
-		dd($request->all());
+		// dd($request->all());
 
-		$event = Event::create($request->except(['_token', 'image', 'type', 'topic', 'hascost', 'cost']));
+		$event = new Event($request->only(['title', 'summary', 'address', 'date', 'time', 'quota', 'description']));
+
+		$event->type()->associate(Type::find($request->input('type')));
+
+		$event->topic()->associate(Topic::find($request->input('topic')));
+
+		$event->user()->associate(Auth::user());
+
+		$event->save();
+
+		if ($request->has('hascost')) {
+			
+			$event->isfree = false;
+			$event->cost = $request->input('cost')*100;
+
+			$event->save();
+		}
 
 		if ($request->hasFile('image')) {
 
@@ -62,16 +79,39 @@ class EventController extends Controller
 
 	public function edit($id)
 	{
+		$types = Type::all();
+
+		$topics = Topic::all();
+
 		$event = Event::find($id);
 
-		return view('crud.events.edit')->with('event', $event);
+		return view('crud.events.edit',compact("event", "topics", "types"));
 	}
 
-	public function update(Request $request, $id)
+	public function update(StoreEvent $request, $id)
 	{
-		$event = Event::find($id);
+		$event = Event::find($id)->update($request->only(['title', 'summary', 'address', 'date', 'time', 'quota', 'description']));
+
+		if ($request->has('hascost') && $event->cost != $request->input('cost')) {
+			
+			$event->isfree = false;
+			$event->cost = $request->input('cost')*100;
+
+			$event->save();
+		}
+
+		if ($request->hasFile('image')) {
+
+			if ($request->file('image')->isValid()) {
+
+				$path = $request->image->store('images', 'public');
+
+				$event->image = $path;
+				$event->save();
+			}
+		}
 		
-		return $request->all();
+		return redirect()->route('crud.events.index')->with('status', 'Evento Modificado Exitosamente');
 	}
 
 	public function delete($id)

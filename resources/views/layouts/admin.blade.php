@@ -32,22 +32,44 @@
 	</style>
 </head>
 <body>
-	<div id="app">
-		<nav>
-			<div class="nav-wrapper">
-				<a href="#!" class="brand-logo">Eventos</a>
-				<ul id="nav-mobile" class="right hide-on-med-and-down">
-					@if (Auth::guest())
-					@else
-						@include('layouts.menu')
-					@endif
-				</ul>
+	<header>
+		<div class="navbar-fixed">
+			<nav>
+				<div class="nav-wrapper">
+					<a href="#!" class="brand-logo">hashevent</a>
+					<ul id="nav-mobile" class="right hide-on-med-and-down">
+						@if (Auth::guest())
+							<li><a href="{{ route('events.list') }}">Eventos</a></li>
+							<li><a href="{{ route('auth.login') }}">Entrar</a></li>
+						@else
+							@include('layouts.menu')
+						@endif
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</header>
+	<main>
+		<div class="">
+			<div class="row">
+				@if (Route::currentRouteName() == "auth.login")
+					<div class="col s10 offset-s1">
+						@include('layouts.alerts')
+						@yield('content')
+					</div>
+				@else
+					<div class="col s3 no-padding">
+						@include('layouts.sidemenu')
+					</div>
+					<div class="col s9">
+						@include('layouts.alerts')
+						@yield('content')
+					</div>
+				@endif
 			</div>
-		</nav>
-		@include('layouts.alerts')
-		@yield('content')
-	</div>
-
+		</div>
+	</main>
+	<footer></footer>
 	<!-- Scripts -->
 	<script src="{{ asset('js/app.js') }}"></script>
 	<script>

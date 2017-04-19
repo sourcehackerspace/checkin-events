@@ -1,6 +1,5 @@
 @extends('layouts.admin')
 @section('content')
-<div class="container">
 	<div class="card">
 		<div class="card-content blue-grey white-text">
 			<span class="card-title">
@@ -8,24 +7,24 @@
 			</span>
 		</div>
 		<div class="card-content">
-			<form action="{{ route('crud.events.storage') }}" method="post" enctype="multipart/form-data">
+			<form action="{{ route('crud.events.storage') }}" method="POST" enctype="multipart/form-data">
 				{{ csrf_field() }}
 				
 				<div class="row">
 					<div class="input-field col l6">
 						<input type="text" name="title" class="validate{{ $errors->has('title') ? ' invalid' : '' }}" id="titleInput" value="{{ old('title') }}">
 						@if ($errors->has('title'))
-							<label for="titleInput" data-error="{{ $errors->first('title') }}" class="active">¿Que titulo va tener?</label>
+							<label for="titleInput" class="active" data-error="{{ $errors->first('title') }}">¿Que titulo va tener?</label>
 						@else
 							<label for="titleInput" class="{{ old('title') ? 'active' : '' }}">¿Que titulo va tener?</label>
 						@endif
 					</div>
 					<div class="input-field col l6">
-						<input type="text" name="summary" class="validate{{ $errors->has('summary') ? ' invalid' : '' }}" id="subtitleInput" value="{{ old('summary') }}" data-length="100">
+						<input type="text" name="summary" class="validate{{ $errors->has('summary') ? ' invalid' : '' }}" id="summaryInput" value="{{ old('summary') }}" data-length="100">
 						@if ($errors->has('summary'))
-							<label for="subtitleInput" class="active" data-error="{{ $errors->first('summary') }}">Resume tu evento en menos de 100 caracteres</label>
+							<label for="summaryInput" class="active" data-error="{{ $errors->first('summary') }}">Resume tu evento en menos de 100 caracteres</label>
 						@else
-							<label for="subtitleInput" class="{{ old('summary') ? 'active' : '' }}">Resume tu evento en menos de 100 caracteres</label>
+							<label for="summaryInput" class="{{ old('summary') ? 'active' : '' }}">Resume tu evento en menos de 100 caracteres</label>
 						@endif
 					</div>
 				</div>
@@ -115,7 +114,7 @@
 							<div class="col l7">
 								<div class="input-field">
 									<i class="fa fa-usd prefix" aria-hidden="true"></i>
-									<input type="number" name="cost" class="validate" id="costInput" value="{{ old('cost') }}" min="20" step="0.01" pattern="\d+(\.\d{1,2})?" disabled>
+									<input type="number" name="cost" class="validate" id="costInput" value="{{ old('cost') }}" min="20" step="0.01" disabled>
 									<label for="costInput" data-error="El pago minimo que se acepta es de $20.00 MXN">Costo Ejemplo: 200.00</label>
 								</div>
 							</div>
@@ -133,8 +132,8 @@
 			</form>
 		</div>
 	</div>
-</div>
 @endsection
+
 @section('js')
 <script src="{{ asset('materialnote/js/ckMaterializeOverrides.js') }}"></script>
 <script src="{{ asset('materialnote/js/materialNote.js') }}"></script>
