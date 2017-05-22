@@ -60,7 +60,7 @@ class Event extends Model
 		return $this->belongsTo(Topic::class);
 	}
 
-	public function user()
+	public function owner()
 	{
 		return $this->belongsTo(User::class);
 	}

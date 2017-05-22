@@ -27,7 +27,7 @@
 							<td>{{ $event->title }}</td>
 							<td>{{ $event->quota }}</td>
 							<td>
-								<a href="#" class="btn waves-effect waves-light blue">Asistentes</a>
+								<a href="{{ route('assistants.index', ['slug' => $event->slug]) }}" class="btn waves-effect waves-light blue">Asistentes</a>
 								<a href="{{ route('crud.events.show', ['id' => $event->id]) }}" class="btn waves-effect waves-light green">Ver</a>
 								<a href="{{ route('crud.events.edit', ['id' => $event->id]) }}" class="btn waves-effect waves-light orange">Modificar</a>
 								<a href="{{ route('crud.events.delete', ['id' => $event->id]) }}" class="btn waves-effect waves-light red delete">Eliminar</a>

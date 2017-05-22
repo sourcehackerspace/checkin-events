@@ -86,7 +86,7 @@
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem odio, saepe, deserunt culpa temporibus minima, praesentium laboriosam itaque aspernatur quasi magnam non. Eligendi alias, officia a aliquam. Sint, nobis quis.</p>
 				</div>
 				<div class="col l4">
-					<form action="" class="valing">
+					<form action="" class="valing form-suscribe">
 						<div class="input-field">
 							<input type="text" id="suscribeInput" style="color:#fff;">
 							<label for="suscribeInput">Dejanos tu correo tu correo.</label>

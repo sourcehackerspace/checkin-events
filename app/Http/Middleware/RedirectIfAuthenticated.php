@@ -18,7 +18,14 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect('/home');
+            if(Auth::user()->type == 'admin'){
+
+                return redirect('/admin/events');
+            }elseif (Auth::user()->type == 'user'){
+
+                return redirect('/account/events');
+            }
+
         }
 
         return $next($request);

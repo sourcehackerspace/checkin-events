@@ -31,12 +31,12 @@ class CreateEventsTable extends Migration
             $table->integer('remaining'); //lugares restantes
             $table->integer('topic_id')->unsigned();
             $table->integer('type_id')->unsigned();
-            $table->integer('user_id')->unsigned();
+            $table->integer('owner_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('type_id')->references('id')->on('types');
             $table->foreign('topic_id')->references('id')->on('topics');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('owner_id')->references('id')->on('users');
         });
     }
 

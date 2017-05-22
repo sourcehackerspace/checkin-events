@@ -46,8 +46,8 @@
 		</div>
 		<div class="col l12">
 			<div class="card primary-light">
-				<div class="card-content white-text">
-					<div class="description">
+				<div class="card-content">
+					<div class="description white-text">
 						{!! $event->description !!}
 					</div>
 				</div>

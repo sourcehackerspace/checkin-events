@@ -6,12 +6,14 @@
 			<div class="card-panel grey lighten-3 z-depth-4">
 				<div class="row">
 					<div class="col l12 center">
-						<img src="http://lorempixel.com/100/100/city/" alt="" class="circle img-responsive">
+						<img src="{{ asset('img/admin.png') }}" alt="" class="circle" style="width: 80px; height: auto;">
 						<h5>Bienvenido</h5>
+						<a href="{{ route('login.facebook') }}" class="btn facebook">Entrar con Facebook</a>
 					</div>
 				</div>
 				<form class="" method="POST" action="{{ route('auth.login') }}">
 					{{ csrf_field() }}
+					<p class="center">O</p>
 					<div class="row">
 						<div class="input-field col l12">
 							<i class="material-icons prefix">perm_identity</i>

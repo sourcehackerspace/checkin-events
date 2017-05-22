@@ -30,7 +30,8 @@ Route::get('/facebook', function(){
 	return view('auth.facebook');
 });
 
-Route::get('auth/facebook', 'SocialController@redirectToProvider')->name('auth.facebook');
+Route::get('register/event', 'SocialController@redirectToProvider')->name('auth.facebook');
+Route::get('login/facebook', 'SocialController@redirectToProvider')->name('login.facebook');
 Route::get('auth/facebook/callback', 'SocialController@handleProviderCallback')->name('auth.callback');
 
 Route::group(['prefix' => 'admin'], function(){
@@ -42,9 +43,14 @@ Route::group(['prefix' => 'admin'], function(){
 	Route::post('/events/update/{id}', 'Crud\EventController@update')->name('crud.events.update');
 	Route::get('/events/delete/{id}', 'Crud\EventController@delete')->name('crud.events.delete');
 
-	Route::get('/users/', 'UserManagmentController@index')->name('users.index');
-	Route::get('/users/show/{id}', 'UserManagmentController@show')->name('users.show');
+	Route::get('/assistants/{slug}/event', 'AssistantController@index')->name('assistants.index');
+	Route::get('/assistants/show/{id}', 'AssistantController@show')->name('assistants.show');
 });
 
-Route::get('/home', 'HomeController@home');
+Route::group(['prefix' => 'account'], function(){
+    Route::get('/events/', 'AccountController@index')->name('account.index');
+    Route::get('/events/last', 'AccountController@lastEvents')->name('account.last');
+});
+
+//Route::get('/home', 'HomeController@home');
 Route::get('/prueba/conekta', 'HomeController@pruebaConekta');

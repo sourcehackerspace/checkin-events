@@ -47,4 +47,20 @@ class User extends Authenticatable
     {
         return $this->hasMany(Event::class);
     }
+
+    public function getIsAdminAttribute()
+    {
+        return $this->attributes['type'] == 'admin' ? true : false;
+    }
+
+    public function getIsUserAttribute()
+    {
+        return $this->attributes['type'] == 'user' ? true : false;
+    }
+
+    public function getIdEncryptAttribute()
+    {
+        return Crypt::encrypt($this->attributes['id']);
+    }
+
 }

@@ -51,7 +51,7 @@ class EventController extends Controller
 
 		$event->topic()->associate(Topic::find($request->input('topic')));
 
-		$event->user()->associate(Auth::user());
+		$event->owner()->associate(Auth::user());
 
 		$event->save();
 

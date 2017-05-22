@@ -27,8 +27,18 @@
 			<div class="nav-wrapper">
 				<a href="{{ url('/') }}" class="brand-logo">hashevent</a>
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					@if(Auth::guest())
 					<li><a href="{{ route('events.list') }}">Eventos</a></li>
 					<li><a href="{{ route('auth.login') }}">Entrar</a></li>
+					@else
+						<li><a href="{{ route('events.list') }}">Eventos</a></li>
+						@if(Auth::user()->isUser)
+						<li><a href="{{ route('account.index') }}">Panel</a></li>
+						@else
+						<li><a href="{{ route('crud.events.index') }}">Panel</a></li>
+						@endif
+						@include('layouts.menu')
+					@endif
 				</ul>
 			</div>
 		</nav>

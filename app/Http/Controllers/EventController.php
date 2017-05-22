@@ -113,7 +113,9 @@ class EventController extends Controller
 		$event = Event::whereSlug($slug)->first();
 
 		if ($event->remaining > 0) {
-			
+
+		    session()->forget('login');
+
 			session(['event' => $event]);
 
 			return view('public.event_show', compact("event"));

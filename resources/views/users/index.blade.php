@@ -19,7 +19,7 @@
 							<td>{{ $user->name }}</td>
 							<td>{{ $user->email }}</td>
 							<td>
-								<a href="{{ route('users.show',['id' => $user->id]) }}" class="btn btn-primary">Ver</a>
+								<a href="{{ route('assistants.show',['id' => $user->id]) }}" class="btn btn-primary">Ver</a>
 							</td>
 						</tr>
 					@endforeach

@@ -244,3 +244,21 @@
 		transform-origin: 50% 50%;
 	}
 }
+
+.form-suscribe{
+	label{
+		color: #FFFFFF !important;
+	}
+
+	input{
+		border-bottom: 1px solid #FFFFFF;
+	}
+}
+
+.facebook{
+	background-color: $facebook-color !important;
+}
+
+.facebook-text{
+	color: $facebook-color !important;
+}

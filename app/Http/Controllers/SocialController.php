@@ -7,6 +7,7 @@ use Socialite;
 use Crypt;
 use App\User;
 use App\Bookmark;
+use Auth;
 
 class SocialController extends Controller
 {
@@ -38,37 +39,46 @@ class SocialController extends Controller
             return back()->with('error', 'Hubo un error, por favor vuelve a registrarte.');
         }
 
-		// dd($user_social); 
 
-		$user = User::firstOrNew(['email' => $user_social->email]);
+        // session(['login' => $user_social->email]);
+        // dd($user_social);
 
-		if (!isset($user->id)) {
+        $user = User::firstOrNew(['email' => $user_social->email]);
 
-			$user->name = $user_social->name;
-			$user->social_auth = true;
-			$user->social_name = $driver;
-			$user->social_token = $user_social->token;
-			$user->social_id = $user_social->id;
-			$user->save();
-		}
+        if (!isset($user->id)) {
+
+            $user->name = $user_social->name;
+            $user->social_auth = true;
+            $user->social_name = $driver;
+            $user->social_token = $user_social->token;
+            $user->social_id = $user_social->id;
+            $user->save();
+        }
 
 
-		if (session()->has('event')) {
+        if (session()->has('event')) {
 
-			$event = session('event');
+            $event = session('event');
 
-			if (Bookmark::where('user_id', $user->id)->where('event_id', $event->id)->count() > 0) {
+            if (Bookmark::where('user_id', $user->id)->where('event_id', $event->id)->count() > 0) {
 
-				return back()->with('error','Ya estas registrado a este curso.');
-			}
-			
-			session()->forget('event');
+                return back()->with('error','Ya estas registrado a este curso.');
+            }
 
-			return redirect()->route('complete.register',['slug' => $event->slug, 'id' => Crypt::encrypt($user->id)]);
-		} else {
+            session()->forget('event');
 
-			return back()->with('error','Hubo un error, por favor vuelve a registrarte.');
-		}
+            return redirect()->route('complete.register',['slug' => $event->slug, 'id' => Crypt::encrypt($user->id)]);
+        }elseif( session()->has('login') ) {
 
+            Auth::login($user);
+
+            session()->forget('login');
+
+            return redirect()->route('account.index');
+
+        }else {
+
+            return back()->with('error','Hubo un error, por favor vuelve a registrarte.');
+        }
 	}
 }
